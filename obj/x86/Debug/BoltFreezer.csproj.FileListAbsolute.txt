@@ -11,3 +11,9 @@ D:\Documents\Frostbow\boltfreezer\bin\Debug\BoltFreezer.pdb
 D:\Documents\Frostbow\boltfreezer\obj\x86\Debug\BoltFreezer.csproj.CoreCompileInputs.cache
 D:\Documents\Frostbow\boltfreezer\obj\x86\Debug\BoltFreezer.dll
 D:\Documents\Frostbow\boltfreezer\obj\x86\Debug\BoltFreezer.pdb
+D:\Documents\Frostbow\gdpops\bin\Debug\BoltFreezer.dll.config
+D:\Documents\Frostbow\gdpops\bin\Debug\BoltFreezer.dll
+D:\Documents\Frostbow\gdpops\bin\Debug\BoltFreezer.pdb
+D:\Documents\Frostbow\gdpops\obj\x86\Debug\BoltFreezer.csproj.CoreCompileInputs.cache
+D:\Documents\Frostbow\gdpops\obj\x86\Debug\BoltFreezer.dll
+D:\Documents\Frostbow\gdpops\obj\x86\Debug\BoltFreezer.pdb

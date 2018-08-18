@@ -180,6 +180,112 @@ namespace TestFreezer
             return newList;
         }
 
+        public List<IPredicate> CreateInitialState_RaceBlock()
+        {
+            var newList = new List<IPredicate>();
+            var terms = new List<ITerm>();
+            terms.Add(new Term("L0", true) as ITerm); //O, L0
+            terms.Add(new Term("L1", true) as ITerm); //1, L1
+            terms.Add(new Term("L2", true) as ITerm); //2, L2
+            terms.Add(new Term("L3", true) as ITerm); //3, L3
+            terms.Add(new Term("L0A", true) as ITerm); //4, L0A
+            terms.Add(new Term("L1A", true) as ITerm); //5, L1A
+            terms.Add(new Term("L2A", true) as ITerm); //6, L2A
+            terms.Add(new Term("L3A", true) as ITerm); //7, L3A
+
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[0], terms[1] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[1], terms[0] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[1], terms[2] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[2], terms[1] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[1], terms[3] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[3], terms[1] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[2], terms[3] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[3], terms[2] }, true));
+
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[4], terms[0] }, true));
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[5], terms[1] }, true));
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[6], terms[2] }, true));
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[7], terms[3] }, true));
+
+            var ob = new Term("OrangeBoid", true) as ITerm;
+            var bb = new Term("BlueBoid", true) as ITerm;
+            var block = new Term("BlockA", true) as ITerm;
+
+            newList.Add(new Predicate("at", new List<ITerm>() { ob, terms[3] }, true));
+            newList.Add(new Predicate("at", new List<ITerm>() { bb, terms[0] }, true));
+            newList.Add(new Predicate("at", new List<ITerm>() { block, terms[5] }, true));
+            newList.Add(new Predicate("occupied", new List<ITerm>() { terms[0] }, true));
+            newList.Add(new Predicate("occupied", new List<ITerm>() { terms[3] }, true));
+            newList.Add(new Predicate("occupied", new List<ITerm>() { terms[5] }, true));
+
+            newList.Add(new Predicate("freehands", new List<ITerm>() { ob }, true));
+            newList.Add(new Predicate("freehands", new List<ITerm>() { bb }, true));
+
+            return newList;
+        }
+
+        public List<IPredicate> CreateInitialState_RaceBlockTest()
+        {
+            var newList = new List<IPredicate>();
+            var terms = new List<ITerm>();
+            terms.Add(new Term("L0", true) as ITerm); //O, L0
+            terms.Add(new Term("L1", true) as ITerm); //1, L1
+            terms.Add(new Term("L2", true) as ITerm); //2, L2
+            terms.Add(new Term("L3", true) as ITerm); //3, L3
+            terms.Add(new Term("L0A", true) as ITerm); //4, L0A
+            terms.Add(new Term("L1A", true) as ITerm); //5, L1A
+            terms.Add(new Term("L2A", true) as ITerm); //6, L2A
+            terms.Add(new Term("L3A", true) as ITerm); //7, L3A
+
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[0], terms[1] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[1], terms[0] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[1], terms[2] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[2], terms[1] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[1], terms[3] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[3], terms[1] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[2], terms[3] }, true));
+            newList.Add(new Predicate("adjacent", new List<ITerm>() { terms[3], terms[2] }, true));
+
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[4], terms[0] }, true));
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[5], terms[1] }, true));
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[6], terms[2] }, true));
+            newList.Add(new Predicate("placeable", new List<ITerm>() { terms[7], terms[3] }, true));
+
+            var ob = new Term("OrangeBoid", true) as ITerm;
+            var bb = new Term("BlueBoid", true) as ITerm;
+            var block = new Term("BlockA", true) as ITerm;
+
+            newList.Add(new Predicate("at", new List<ITerm>() { ob, terms[3] }, true));
+            newList.Add(new Predicate("at", new List<ITerm>() { bb, terms[1] }, true));
+            newList.Add(new Predicate("at", new List<ITerm>() { block, terms[5] }, true));
+            newList.Add(new Predicate("occupied", new List<ITerm>() { terms[1] }, true));
+            newList.Add(new Predicate("occupied", new List<ITerm>() { terms[3] }, true));
+            newList.Add(new Predicate("occupied", new List<ITerm>() { terms[5] }, true));
+
+            newList.Add(new Predicate("freehands", new List<ITerm>() { ob }, true));
+            newList.Add(new Predicate("freehands", new List<ITerm>() { bb }, true));
+
+            return newList;
+        }
+
+        public List<IPredicate> CreateGoalState_RaceBlock()
+        {
+            var block = new Term("BlockA", true) as ITerm;
+            var orange = new Term("OrangeBoid", true) as ITerm;
+            var blue = new Term("BlueBoid", true) as ITerm;
+            var gc = new Predicate("chasedby", new List<ITerm>() { blue, orange }, true) as IPredicate;
+            var goalCondition = new Predicate("at", new List<ITerm>() { block, new Term("L0A", true) as ITerm }, true);
+            return new List<IPredicate>() { goalCondition};
+        }
+
+        public List<IPredicate> CreateGoalState_RaceBlockTest()
+        {
+            var bb = new Term("BlueBoid", true) as ITerm;
+            var ob = new Term("OrangeBoid", true) as ITerm;
+            var goalCondition = new Predicate("chasedby", new List<ITerm>() { bb, ob }, true);
+            return new List<IPredicate>() { goalCondition };
+        }
+
         public List<IPredicate> CreateGoalState_Race1()
         {
             var bb = new Term("BlueBoid", true) as ITerm;
@@ -251,9 +357,8 @@ namespace TestFreezer
             DecacheSteps();
 
             // create initial State
-            var initialState = CreateInitialStateRace();
-           // initialState = MakeObservable(initialState);
-           // initialState = AddObservedNegativeConditions(initialState);
+            // initialState = MakeObservable(initialState);
+            // initialState = AddObservedNegativeConditions(initialState);
 
             // create goal state
             //var goalState = CreateGoalState();
@@ -262,8 +367,17 @@ namespace TestFreezer
             //var goalState = CreateGoalState_GetBlock2ToL4();
             //var goalState = CreateGoalState_GetBlock1ToL4();
             //var goalState = CreateGoalState_Race1();
-            var goalState = CreateGoalState_DuelState();
             //goalState = MakeObservable(goalState);
+
+            //// Race World
+            //var initialState = CreateInitialStateRace();
+            //var goalState = CreateGoalState_DuelState();
+
+            //// RaceBlock World
+            //var initialState = CreateInitialState_RaceBlockTest();
+            var initialState = CreateInitialState_RaceBlock();
+            //var goalState = CreateGoalState_RaceBlockTest();
+            var goalState = CreateGoalState_RaceBlock();
 
             var CausalMapFileName = GetCausalMapFileName();
             var ThreatMapFileName = GetThreatMapFileName();
@@ -303,14 +417,14 @@ namespace TestFreezer
         }
 
 
-        public IPlan Run(IPlan initPlan, ISearch SearchMethod, ISelection SelectMethod, float cutoff)
+        public IPlan Run(IPlan initPlan, ISearch SearchMethod, ISelection SelectMethod, int pnum, float cutoff)
         {
             var directory = Parser.GetTopDirectory() + "/Results/";
             System.IO.Directory.CreateDirectory(directory);
             var POP = new PlannerScheduler(initPlan.Clone() as IPlan, SelectMethod, SearchMethod)
             {
                 directory = directory,
-                problemNumber = 0
+                problemNumber = pnum
             };
             //Debug.Log("Running plan-search");
             var Solutions = POP.Solve(1, cutoff);
@@ -321,6 +435,11 @@ namespace TestFreezer
             }
             //Debug.Log(string.Format("explored: {0}, expanded: {1}", POP.Open, POP.Expanded));
             return null;
+        }
+
+        public void DaRest(float cutoffTime) 
+        {
+
         }
 
         public List<string> RunTest(float cutoffTime)
@@ -335,33 +454,67 @@ namespace TestFreezer
 
             // MW-Loc-Conf
 
-            //var solution = Run(initialPlan, new ADstar(false), new E0(new ZeroHeuristic()), cutoffTime);
-            //var solution = Run(initialPlan, new ADstar(false), new E0(new NumOpenConditionsHeuristic()), cutoffTime);
-            //var solution = Run(initialPlan, new ADstar(false), new E0(new AddReuseHeuristic(), true), cutoffTime);
-            // var solution = Run(initialPlan, new ADstar(false), new E3(new AddReuseHeuristic()), cutoffTime);
+            //Run(initialPlan, new ADstar(false), new E0(new ZeroHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E0(new NumOpenConditionsHeuristic(), true), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E0(new AddReuseHeuristic(), true), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E1(new ZeroHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E1(new NumOpenConditionsHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E1(new AddReuseHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E2(new ZeroHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E2(new NumOpenConditionsHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E3(new ZeroHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //Run(initialPlan, new ADstar(false), new E3Star(new ZeroHeuristic()), cutoffTime);
+            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            //var solution = Run(initialPlan, new ADstar(false), new E2(new AddReuseHeuristic()), cutoffTime);
 
 
-            var solution = Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic()), cutoffTime);
+            //var solution = Run(initialPlan, new ADstar(false), new E3(new AddReuseHeuristic()), cutoffTime);
+            //var solution = Run(initialPlan, new ADstar(false), new E3(new NumOpenConditionsHeuristic()), cutoffTime);
+            //var solution = Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic(), 1), 1, cutoffTime);
+            
+            var karray = new List<int>() { 1, 2, 4, 6, 8, 16 };
+            foreach(var k in karray)
+            {
+                initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic(), k), k, cutoffTime);
+                initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic(), k), k, cutoffTime);
+                initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                Run(initialPlan, new ADstar(false), new E3Star(new ZeroHeuristic(), k), k, cutoffTime);
+            }
+
+            //var solution = Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic()), cutoffTime);
+            //var solution = Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic()), cutoffTime);
             //var solution = Run(initialPlan, new ADstar(false), new E3(new AddReuseHeuristic()), cutoffTime);
 
 
             //var solution = Run(initialPlan, new ADstar(false), new E3(new AddReuseHeuristic()), cutoffTime);
             //var solution = Run(initPlan, new BFS(), new Nada(new ZeroHeuristic()), 20000);
-            if (solution != null)
-            {
-                //Debug.Log(solution.ToStringOrdered());
 
-                foreach (var step in solution.Orderings.TopoSort(solution.InitialStep))
-                {
-                    Console.WriteLine(step);
-                    PlanSteps.Add(step.ToString());
-                }
-            }
-            else
-            {
+            //if (solution != null)
+            //{
+            //    //Debug.Log(solution.ToStringOrdered());
 
-                Console.WriteLine("No good");
-            }
+            //    foreach (var step in solution.Orderings.TopoSort(solution.InitialStep))
+            //    {
+            //        Console.WriteLine(step);
+            //        PlanSteps.Add(step.ToString());
+            //    }
+            //}
+            //else
+            //{
+
+            //    Console.WriteLine("No good");
+            //}
             return PlanSteps;
         }
     }

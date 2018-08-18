@@ -18,3 +18,13 @@ D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\Debug\TestFreezer.csprojResolv
 D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\Debug\TestFreezer.csproj.CoreCompileInputs.cache
 D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\Debug\TestFreezer.exe
 D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\Debug\TestFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\Debug\TestFreezer.exe.config
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\Debug\TestFreezer.exe
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\Debug\TestFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\Debug\BoltFreezer.dll
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\Debug\BoltFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\Debug\BoltFreezer.dll.config
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\Debug\TestFreezer.csproj.CoreCompileInputs.cache
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\Debug\TestFreezer.csproj.CopyComplete
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\Debug\TestFreezer.exe
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\Debug\TestFreezer.pdb

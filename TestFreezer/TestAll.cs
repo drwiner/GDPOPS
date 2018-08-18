@@ -200,7 +200,20 @@ namespace TestFreezer
             ci.problemname = "duel5Test";
             ci.problemname = "duel6Test";
             //ci.problemname = "michael3test";
-            ci.RunTest(1000000f);
+            ci.problemname = "raceblocktest6_";
+            ci.problemname = "raceblocktest14__";
+            ci.problemname = "raceblocktest19_";
+            ci.problemname = "raceblocktest20_";
+            ci.problemname = "raceblocktest21_";
+            ci.problemname = "raceblockSingles2_";
+            ci.problemname = "raceblockModHeight0_";
+
+            // Experiment Test, has 2 singles, plus 4 composites, with mod height procedure.
+            ci.problemname = "raceblockModHeightExp2_";
+            // 3 singles (stroll, pickup, put down)
+            ci.problemname = "raceblockModHeightExp3_";
+
+            ci.RunTest(600000f);
 
             // search (false ==> ignore depth as stopping condition, is default). Selection (E0) (true=> do check for no flaws no matter depth).
 

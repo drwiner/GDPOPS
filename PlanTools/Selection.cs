@@ -163,10 +163,17 @@ namespace BoltFreezer.PlanTools
     public class E3Star : ISelection
     {
         private IHeuristic HMethod;
+        protected int weight = 8;
 
         public E3Star(IHeuristic hmethod)
         {
             HMethod = hmethod;
+        }
+
+        public E3Star(IHeuristic hmethod, int _weight)
+        {
+            HMethod = hmethod;
+            weight = _weight;
         }
 
         public SelectionType EType => SelectionType.E3Star;
@@ -189,10 +196,15 @@ namespace BoltFreezer.PlanTools
             //}
             var cost = (plan.Steps.Count - (3 * plan.Decomps));
             var heuristic = HMethod.Heuristic(plan);
-            var decompIncentive = (float)(System.Math.Log((double)plan.Hdepth + 1f, 2) * 25);
+            //var decompIncentive = (float)(System.Math.Log((double)plan.Hdepth + 1f, 2) * 24);
+            //return cost + heuristic - decompIncentive;
+            if (plan.Decomps == 0)
+            {
+                return cost + heuristic;
+            }
+            var decompIncentive = (float)(plan.Hdepth / plan.Decomps) * weight;
 
-
-            return cost + heuristic - (float)decompIncentive;
+            return cost  + heuristic - decompIncentive;
         }
     }
 

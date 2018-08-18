@@ -94,8 +94,9 @@ namespace BoltFreezer.PlanSpace
 
                 //Visited.Add(plan as Plan);
                 var score = Score(plan);
-                if (score > 200)
+                if (score > 600)
                 {
+                    Console.WriteLine(score);
                     // reduce size of frontier
                     return;
                 }

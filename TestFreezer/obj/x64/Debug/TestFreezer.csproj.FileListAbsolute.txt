@@ -29,3 +29,14 @@ D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\x64\Debug\TestFreezer.csproj.C
 D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\x64\Debug\TestFreezer.csproj.CopyComplete
 D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\x64\Debug\TestFreezer.exe
 D:\Documents\Frostbow\boltfreezer\TestFreezer\obj\x64\Debug\TestFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\x64\Debug\TestFreezer.csproj.CoreCompileInputs.cache
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\x64\Debug\TestFreezer.exe.config
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\x64\Debug\TestFreezer.exe
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\x64\Debug\TestFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\x64\Debug\BoltFreezer.dll
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\x64\Debug\BoltFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\bin\x64\Debug\BoltFreezer.dll.config
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\x64\Debug\TestFreezer.csproj.CopyComplete
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\x64\Debug\TestFreezer.exe
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\x64\Debug\TestFreezer.pdb
+D:\Documents\Frostbow\gdpops\TestFreezer\obj\x64\Debug\TestFreezer.csprojAssemblyReference.cache

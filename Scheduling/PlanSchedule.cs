@@ -60,7 +60,9 @@ namespace BoltFreezer.Scheduling
         {
             if (newStep.Height > 0)
             {
-               // var ns = newStep as ICompositePlanStep;
+                // var ns = newStep as ICompositePlanStep;
+                Hdepth += newStep.Height;
+                Decomps += 1;
                 InsertDecomp(newStep as CompositeSchedulePlanStep);
             }
             else
@@ -76,7 +78,7 @@ namespace BoltFreezer.Scheduling
 
         public void InsertDecomp(CompositeSchedulePlanStep newStep)
         {
-            Decomps += 1;
+            
             var IDMap = new Dictionary<int, IPlanStep>();
 
             // Clone, Add, and Order Initial step
@@ -101,7 +103,7 @@ namespace BoltFreezer.Scheduling
 
             dummyInit.GoalCndt = dummyGoal;
 
-            this.ID += "([" + dummyInit.ID.ToString() + ',' + dummyGoal.ID.ToString() + "])";
+            //this.ID += "([" + dummyInit.ID.ToString() + ',' + dummyGoal.ID.ToString() + "])";
             
 
             // needs same operator ID as newStep, in order to still be referenced for primary-effect-based open conditions
@@ -183,10 +185,11 @@ namespace BoltFreezer.Scheduling
 
                     InsertPrimitiveSubstep(newsubstep, dummyInit.Effects, false);
 
-                    if (newsubstep.Depth > Hdepth)
-                    {
-                        Hdepth = newsubstep.Depth;
-                    }
+                    // Pre-Mod
+                    //if (newsubstep.Depth > Hdepth)
+                    //{
+                    //    Hdepth = newsubstep.Depth;
+                    //}
                 }
             }
 
@@ -633,7 +636,7 @@ namespace BoltFreezer.Scheduling
                             // then, need to tuck t into Q's borders.
                             var tailRoot = GetStepByID(DeLinks.GetRoot(clink.Tail)) as CompositePlanStep;
                             Orderings.Insert(tailRoot.GoalStep, stepAsComp.InitialStep);
-                            this.ID += string.Format("(^Od[{0},{1}])", tailRoot.GoalStep.ID, stepAsComp.InitialStep.ID);
+                            //this.ID += string.Format("(^Od[{0},{1}])", tailRoot.GoalStep.ID, stepAsComp.InitialStep.ID);
                         }
 
                         continue;
@@ -720,7 +723,7 @@ namespace BoltFreezer.Scheduling
                             // then, need to tuck t into Q's borders.
                             var tailRoot = GetStepByID(DeLinks.GetRoot(clink.Tail)) as CompositePlanStep;
                             Orderings.Insert(tailRoot.GoalStep, possibleThreatComposite.InitialStep);
-                            this.ID += string.Format("(^Od2[{0},{1}])", tailRoot.GoalStep.ID, possibleThreatComposite.InitialStep.ID);
+                            //this.ID += string.Format("(^Od2[{0},{1}])", tailRoot.GoalStep.ID, possibleThreatComposite.InitialStep.ID);
                         }
 
                         continue;

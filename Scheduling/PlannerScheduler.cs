@@ -106,6 +106,7 @@ namespace BoltFreezer.Scheduling
                         Depth = oc.step.Depth
                     };
                 }
+                planClone.ID += "(" + GroundActionFactory.GroundActions.IndexOf(newStep.Action) + ")";
                 LogTime("CloneCndt", watch.ElapsedMilliseconds - before);
 
                 
@@ -133,12 +134,12 @@ namespace BoltFreezer.Scheduling
                     {
                         var compNewStep = newStep as CompositeSchedulePlanStep;
                         planClone.Orderings.Insert(oc.step.InitCndt, compNewStep.InitialStep);
-                        planClone.ID +=  string.Format("(^Oa[{0},{1}])", oc.step.InitCndt.ID, compNewStep.InitialStep.ID);
+                        //planClone.ID +=  string.Format("(^Oa[{0},{1}])", oc.step.InitCndt.ID, compNewStep.InitialStep.ID);
                     }
                     else
                     {
                         planClone.Orderings.Insert(oc.step.InitCndt, newStep);
-                        planClone.ID += string.Format("(^Oa[{0},{1}])", oc.step.InitCndt.ID, newStep.ID);
+                        //planClone.ID += string.Format("(^Oa[{0},{1}])", oc.step.InitCndt.ID, newStep.ID);
                     }
                 }
                 
@@ -190,10 +191,10 @@ namespace BoltFreezer.Scheduling
                             continue;
 
                         var planClone = plan.Clone() as IPlan;
-                        if (planClone.ID.Equals("1335a"))
-                        {
-                            Console.WriteLine("Here");
-                        }
+                        //if (planClone.ID.Equals("1335a"))
+                        //{
+                        //    Console.WriteLine("Here");
+                        //}
                         // need to modify stepAsComposite, so going to rereference on cloned plan.
                         var stepAsCompositeClone = planClone.Steps.First(s => s.ID == stepAsComposite.ID) as CompositeSchedulePlanStep;
                         planClone.Repair(oc, stepAsCompositeClone);
@@ -249,7 +250,7 @@ namespace BoltFreezer.Scheduling
                     promote.Orderings.Insert(cl.Tail, cps.InitialStep);
                     // because no guaranteed ordering between head and tail
                     promote.Orderings.Insert(cl.Head, cps.InitialStep);
-                    promote.ID += string.Format("(^Opc[{0},{1}])", cl.Tail.ID, cps.InitialStep.ID);
+                    //promote.ID += string.Format("(^Opc[{0},{1}])", cl.Tail.ID, cps.InitialStep.ID);
 
                     Insert(promote);
                 }
@@ -265,7 +266,7 @@ namespace BoltFreezer.Scheduling
                     demote.Orderings.Insert(cps.GoalStep, cl.Head);
                     // because no guaranteed ordering between head and tail
                     demote.Orderings.Insert(cps.GoalStep, cl.Tail);
-                    demote.ID += string.Format("(^Odc[{0},{1}])", cps.GoalStep.ID, cl.Head.ID);
+                    //demote.ID += string.Format("(^Odc[{0},{1}])", cps.GoalStep.ID, cl.Head.ID);
 
                     Insert(demote);
                 }
@@ -283,7 +284,7 @@ namespace BoltFreezer.Scheduling
                         promote.Orderings.Insert(cl.Tail.GoalCndt, threat);
                     }
                     promote.Orderings.Insert(cl.Tail, threat);
-                    promote.ID += string.Format("(^Op[{0},{1}])", cl.Tail.ID, threat.ID);
+                    //promote.ID += string.Format("(^Op[{0},{1}])", cl.Tail.ID, threat.ID);
                     Insert(promote);
                 }
 
@@ -298,7 +299,7 @@ namespace BoltFreezer.Scheduling
                     }
                     demote.Orderings.Insert(threat, cl.Head);
                     //demote.Orderings.Insert(threat, cl.Tail);
-                    demote.ID += string.Format("(^Odp[{0},{1}])", threat.ID, cl.Head);
+                    //demote.ID += string.Format("(^Odp[{0},{1}])", threat.ID, cl.Head);
                     Insert(demote);
                 }
             }
