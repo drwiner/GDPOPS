@@ -439,6 +439,72 @@ namespace TestFreezer
             return prob;
         }
 
+        public static Problem ReadStringGeneratedProblem(string file, string problemName)
+        {
+            string[] input = System.IO.File.ReadAllLines(file);
+
+            List<IObject> problemObjects = new List<IObject>();
+            List<IPredicate> initialPreds = new List<IPredicate>();
+            List<IPredicate> goalPreds = new List<IPredicate>();
+
+            // objects, then initial state, then goal state
+            int i = 3;
+            bool onObjects = true;
+            bool onInit = false;
+            while (true)
+            {
+                if (onObjects)
+                {
+
+                    var objType = input[i].Split('_').First();
+                    if (objType.Equals("agent"))
+                    {
+                        objType = "steeringagent";
+                    }
+                    var newObject = new Obj(input[i], objType) as IObject;
+                    problemObjects.Add(newObject);
+                    i++;
+                    if (input[i].Equals("") || input[i].Equals("\n"))
+                    {
+                        onObjects = false;
+                        onInit = true;
+                        i = i + 2;
+                    }
+                }
+
+                if (onInit)
+                {
+
+                    var newInit = ParenthesisStringToPredicate(input[i]);
+                    initialPreds.Add(newInit);
+                    i++;
+
+                    if (input[i].Equals("") || input[i].Equals("\n"))
+                    {
+                        onInit = false;
+                        i = i + 2;
+                    }
+                }
+
+                if (!onInit && !onObjects)
+                {
+                    var pred = ParenthesisStringToPredicate(input[i]);
+                    goalPreds.Add(pred);
+                    i++;
+                }
+
+                if (i >= input.Count())
+                {
+                    break;
+                }
+
+            }
+
+            // create new Problem
+            var prob = new Problem(problemName, problemName, "raceblocks", "", problemObjects, initialPreds, goalPreds);
+            return prob;
+        }
+
 
         public static void RunProblem(string directory, string domainName, string domainDirectory, Domain domain, Problem problem, float cutoff, int HTN_level, Dictionary<Composite, List<Decomposition>> CompositeMethods)
         {

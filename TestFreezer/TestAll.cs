@@ -213,7 +213,17 @@ namespace TestFreezer
             // 3 singles (stroll, pickup, put down)
             ci.problemname = "raceblockModHeightExp3_";
 
-            ci.RunTest(600000f);
+            //for (int i =34; i < 40; i++)
+            //{
+            //    ci.problemname = "RaceBlockWorld3_" + i.ToString()+ "_";
+
+            //    ci.RunTest(600000f, i);
+            //    GroundActionFactory.Reset();
+            //    CacheMaps.Reset();
+            //}
+            ci.problemname = "car_race_world_wcomp_12_";
+            var storedProblem = @"D:\Documents\Frostbow\Benchmarks\unityOutput\unity_unity_output_problem.txt";
+            ci.RunTest(600000f, 1, storedProblem, false);
 
             // search (false ==> ignore depth as stopping condition, is default). Selection (E0) (true=> do check for no flaws no matter depth).
 

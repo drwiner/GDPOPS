@@ -587,6 +587,15 @@ namespace BoltFreezer.Scheduling
                 this.ID += "s";
                 //var repairEff = repairStep.Effects.Where(e => cxtp.Equals(oc.precondition)).First() ;
                 RepairWithMerge(oc.precondition, needStep, repairStep);
+                var otherflawsFromSameNeedStep = this.flaws.OpenConditions.Where(openC => openC.step.ID == oc.step.ID).ToList();
+                foreach (var otherFlaw in otherflawsFromSameNeedStep)
+                {
+                    if (CacheMaps.IsCndt(otherFlaw.precondition, repairStep))
+                    {
+                        // Remove this flaw, because it would have been satisfied by this repair step. SHOULD produce new plan for each decision. 
+                        this.flaws.OpenConditions.Remove(otherFlaw);
+                    }
+                }
                 return;
             }
             //if (oc.precondition.Name.Equals("obs-starts"))
@@ -632,8 +641,16 @@ namespace BoltFreezer.Scheduling
 
                         if (!DeLinks.OnDecompPath(clink.Tail, step.ID))
                         {
+                            // Special Case is when clink.Tail is goal step. Then we cannot tuck clink.Tail into borders.
+                            if (clink.Tail.Equals(goalStep))
+                            {
+                                // We want to end this plan's existence, so we add a threat that cannot be resolved.
+                                Flaws.Add(new ThreatenedLinkFlaw(clink, step));
+                                continue;
+                            }
                             // Q --> s -p-> t, not p in eff(Q), not Q --> t
                             // then, need to tuck t into Q's borders.
+
                             var tailRoot = GetStepByID(DeLinks.GetRoot(clink.Tail)) as CompositePlanStep;
                             Orderings.Insert(tailRoot.GoalStep, stepAsComp.InitialStep);
                             //this.ID += string.Format("(^Od[{0},{1}])", tailRoot.GoalStep.ID, stepAsComp.InitialStep.ID);

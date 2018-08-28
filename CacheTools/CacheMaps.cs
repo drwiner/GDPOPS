@@ -344,18 +344,32 @@ namespace BoltFreezer.PlanTools
         public static void PrimaryEffectHack(IState InitialState)
         {
             // Finds primary effects: for each composite step, if its precondition has no visitedPreds value.
-            CalculatePrimaryEffects();
+            CalculatePrimaryEffects(InitialState);
 
             var initialMap = new TupleMap<IPredicate, int>();
             var primaryEffectsInInitialState = new List<IPredicate>();
-            foreach (var item in InitialState.Predicates)
+            foreach (var primaryeff in PrimaryEffects)
             {
-                if (IsPrimaryEffect(item))
+                if (InitialState.InState(primaryeff))
                 {
-                    primaryEffectsInInitialState.Add(item);
-                    initialMap.Get(item.Sign)[item] = 0;
+                    primaryEffectsInInitialState.Add(primaryeff);
+                    initialMap.Get(primaryeff.Sign)[primaryeff] = 0;
                 }
             }
+            //foreach (var item in InitialState.Predicates)
+            //{
+            //    if (IsPrimaryEffect(item))
+            //    {
+            //        primaryEffectsInInitialState.Add(item);
+            //        initialMap.Get(item.Sign)[item] = 0;
+            //    }
+            //    var reversedItem = item.GetReversed();
+            //    if (IsPrimaryEffect(reversedItem))
+            //    {
+            //        primaryEffectsInInitialState.Add(reversedItem);
+            //        initialMap.Get(reversedItem.Sign)[reversedItem] = 0;
+            //    }
+            //}
 
             var heurDict = PrimaryEffectRecursiveHeuristicCache(initialMap, primaryEffectsInInitialState);
 
@@ -369,7 +383,7 @@ namespace BoltFreezer.PlanTools
             }
         }
 
-        private static void CalculatePrimaryEffects()
+        private static void CalculatePrimaryEffects(IState initialState)
         {
             PrimaryEffects = new List<IPredicate>();
             var CompositeOps = GroundActionFactory.GroundActions.Where(act => act.Height > 0);
@@ -380,6 +394,12 @@ namespace BoltFreezer.PlanTools
                 {
                     if (!HeuristicMethods.visitedPreds.Get(precon.Sign).ContainsKey(precon))
                     {
+                        if (initialState.InState(precon))
+                        {
+                            PrimaryEffects.Add(precon);
+                            HeuristicMethods.visitedPreds.Get(precon.Sign)[precon] = 1;
+                            continue;
+                        }
                         PrimaryEffects.Add(precon);
                         HeuristicMethods.visitedPreds.Get(precon.Sign)[precon] = 200;
                     }

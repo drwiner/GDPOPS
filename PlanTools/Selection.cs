@@ -180,7 +180,7 @@ namespace BoltFreezer.PlanTools
 
         public new string ToString()
         {
-            return EType.ToString() + "-" + HMethod.ToString();
+            return EType.ToString() + "x" + weight.ToString() + "-" + HMethod.ToString();
         }
 
         public float Evaluate(IPlan plan)

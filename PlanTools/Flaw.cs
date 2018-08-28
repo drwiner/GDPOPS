@@ -169,6 +169,10 @@ namespace BoltFreezer.PlanTools
                     return -1;
                 }
             }
+            else if (other.precondition.Name.Equals("obs-starts") || other.precondition.Name.Equals("obss"))
+            {
+                return 1;
+            }
 
             // MW-Loc-Conf = {threats} LIFO / {unsafe} MW_add / {local} MW_add
 

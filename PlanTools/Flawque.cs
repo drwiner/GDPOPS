@@ -126,7 +126,7 @@ namespace BoltFreezer.PlanTools
 
             foreach (var oc in OpenConditions.Skip(1))
             {
-                if (oc < best_flaw)
+                if (oc.CompareTo(best_flaw) < 0)
                     best_flaw = oc;
             }
 

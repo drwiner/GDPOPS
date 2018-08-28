@@ -396,6 +396,35 @@ namespace TestFreezer
 
         }
 
+
+        public void DeCacheWithProblemSpec(string storedproblemFile)
+        {
+            Parser.path = @"D:\documents\frostbow\";
+            DecacheSteps();
+
+            //var problemPath = @"D:\Documents\Frostbow\Benchmarks\Problems\" + problemname + "problem.txt";
+            //var problemPath = problemDirectory + problemName;
+            var prob=  BlockTest.ReadStringGeneratedProblem(storedproblemFile, 0);
+            var initialState = prob.Initial;
+            var goalState = prob.Goal;
+
+            var CausalMapFileName = GetCausalMapFileName();
+            var ThreatMapFileName = GetThreatMapFileName();
+            var EffortMapFileName = GetEffortDictFileName();
+
+            CacheMaps.CacheLinks(GroundActionFactory.GroundActions);
+            CacheMaps.CacheGoalLinks(GroundActionFactory.GroundActions, goalState);
+
+            var iniTstate = new State(initialState) as IState;
+            CacheMaps.CacheAddReuseHeuristic(iniTstate);
+            CacheMaps.PrimaryEffectHack(iniTstate);
+
+
+            initial = initialState;
+            goal = goalState;
+
+        }
+
         public string GetFileName()
         {
             return Parser.GetTopDirectory() + @"Cached\CachedOperators\UnityBlocksWorld\" + problemname;
@@ -437,60 +466,52 @@ namespace TestFreezer
             return null;
         }
 
-        public void DaRest(float cutoffTime) 
-        {
-
-        }
-
-        public List<string> RunTest(float cutoffTime)
+        public List<string> RunTest(float cutoffTime, int probNum, string problemDirectory, bool run_all)
         {
             Parser.path = @"D:\documents\frostbow\";
-            DeCacheIt();
+            DeCacheWithProblemSpec(problemDirectory);
 
             var initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
             var PlanSteps = new List<string>();
 
-            //Debug.Log("Planner and initial plan Prepared");
+            initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+            Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic(), 6), probNum, cutoffTime);
 
-            // MW-Loc-Conf
-
-            //Run(initialPlan, new ADstar(false), new E0(new ZeroHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E0(new NumOpenConditionsHeuristic(), true), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E0(new AddReuseHeuristic(), true), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E1(new ZeroHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E1(new NumOpenConditionsHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E1(new AddReuseHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E2(new ZeroHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E2(new NumOpenConditionsHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E3(new ZeroHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //Run(initialPlan, new ADstar(false), new E3Star(new ZeroHeuristic()), cutoffTime);
-            //initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            //var solution = Run(initialPlan, new ADstar(false), new E2(new AddReuseHeuristic()), cutoffTime);
-
-
-            //var solution = Run(initialPlan, new ADstar(false), new E3(new AddReuseHeuristic()), cutoffTime);
-            //var solution = Run(initialPlan, new ADstar(false), new E3(new NumOpenConditionsHeuristic()), cutoffTime);
-            //var solution = Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic(), 1), 1, cutoffTime);
-            
-            var karray = new List<int>() { 1, 2, 4, 6, 8, 16 };
-            foreach(var k in karray)
+            if (run_all)
             {
+
+                // E0
                 initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-                Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic(), k), k, cutoffTime);
+                Run(initialPlan, new ADstar(false), new E0(new AddReuseHeuristic()), probNum, cutoffTime);
                 initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-                Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic(), k), k, cutoffTime);
+                Run(initialPlan, new ADstar(false), new E0(new NumOpenConditionsHeuristic()), probNum, cutoffTime);
                 initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-                Run(initialPlan, new ADstar(false), new E3Star(new ZeroHeuristic(), k), k, cutoffTime);
+                Run(initialPlan, new ADstar(false), new E0(new ZeroHeuristic()), probNum, cutoffTime);
+
+                // E3
+                initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                Run(initialPlan, new ADstar(false), new E3(new AddReuseHeuristic()), probNum, cutoffTime);
+                initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                Run(initialPlan, new ADstar(false), new E3(new NumOpenConditionsHeuristic()), probNum, cutoffTime);
+
+
+                initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                Run(initialPlan, new ADstar(false), new E3(new ZeroHeuristic()), probNum, cutoffTime);
+
+                var karray = new List<int>() { 1, 2, 4, 6, 8, 16 };
+                foreach (var k in karray)
+                {
+
+
+                    initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                    Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic(), k), probNum, cutoffTime);
+                    initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                    Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic(), k), probNum, cutoffTime);
+                    initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+                    Run(initialPlan, new ADstar(false), new E3Star(new ZeroHeuristic(), k), probNum, cutoffTime);
+                }
             }
+            // END OF ESPERIMENT
 
             //var solution = Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic()), cutoffTime);
             //var solution = Run(initialPlan, new ADstar(false), new E3Star(new NumOpenConditionsHeuristic()), cutoffTime);
