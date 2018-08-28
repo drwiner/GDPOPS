@@ -24,6 +24,7 @@ namespace BoltFreezer.PlanTools
         public int risks = 0;
         public int cndts = 0;
         public int addReuseHeuristic = -1;
+        public IPlanStep substepflawcndt = null;
         
 
         FlawType IFlaw.Ftype
@@ -263,7 +264,8 @@ namespace BoltFreezer.PlanTools
                 cndts = cndts,
                 addReuseHeuristic = addReuseHeuristic,
                 hasDummyInit = hasDummyInit,
-                isDummyGoal = isDummyGoal
+                isDummyGoal = isDummyGoal,
+                substepflawcndt = substepflawcndt
             };
             return oc;
         }

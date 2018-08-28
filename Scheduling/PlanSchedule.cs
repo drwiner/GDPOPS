@@ -592,8 +592,9 @@ namespace BoltFreezer.Scheduling
                 {
                     if (CacheMaps.IsCndt(otherFlaw.precondition, repairStep))
                     {
+                        otherFlaw.substepflawcndt = repairStep.GoalStep;
                         // Remove this flaw, because it would have been satisfied by this repair step. SHOULD produce new plan for each decision. 
-                        this.flaws.OpenConditions.Remove(otherFlaw);
+                        //this.flaws.OpenConditions.Remove(otherFlaw);
                     }
                 }
                 return;

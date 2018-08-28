@@ -221,7 +221,7 @@ namespace TestFreezer
             //    GroundActionFactory.Reset();
             //    CacheMaps.Reset();
             //}
-            ci.problemname = "car_race_world_wcomp_12_";
+            ci.problemname = "car_race_world_wcomp_14_";
             var storedProblem = @"D:\Documents\Frostbow\Benchmarks\unityOutput\unity_unity_output_problem.txt";
             ci.RunTest(600000f, 1, storedProblem, false);
 

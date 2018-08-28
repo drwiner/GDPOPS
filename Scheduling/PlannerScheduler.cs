@@ -62,6 +62,7 @@ namespace BoltFreezer.Scheduling
 
         public new void AddStep(IPlan plan, OpenCondition oc)
         {
+
             long before = 0;
             // check oc step depth.
            
@@ -156,6 +157,11 @@ namespace BoltFreezer.Scheduling
 
         public new void Reuse(IPlan plan, OpenCondition oc)
         {
+            if (oc.substepflawcndt != null)
+            {
+                ConsiderAddedSubstep(plan, oc);
+            }
+
             // if repaired by initial state
             if (plan.Initial.InState(oc.precondition))
             {
@@ -228,6 +234,28 @@ namespace BoltFreezer.Scheduling
                     }
                 }
             }
+        }
+
+        protected void ConsiderAddedSubstep(IPlan plan, OpenCondition oc)
+        {
+            // Consider a sub-step that has been added to the subplan containing oc.step, as a possible supplier for the oc.step's precondition. 
+            var consideredPlan = plan.Clone() as IPlan;
+            consideredPlan.ID += "c";
+            var ocstep = consideredPlan.Find(oc.step);
+            var substep = consideredPlan.Find(oc.substepflawcndt);
+
+            // Redirect, for each causal link between oc.step and outgoing with same condition
+            var redirectedCausalLinks = consideredPlan.CausalLinks.Where(cl => cl.Head.ID == ocstep.ID && cl.Predicate.Equals(oc.precondition)).ToList();
+            foreach(var redirectedLink in redirectedCausalLinks)
+            {
+                // Remove the causal link that was from the open condition step to whatever it was pointed to
+                consideredPlan.CausalLinks.Remove(redirectedLink);
+                // Create a new causal link that stems from the considered substep
+                var newLink = new CausalLink<IPlanStep>(oc.precondition, substep, redirectedLink.Tail);
+                consideredPlan.CausalLinks.Add(newLink);
+            }
+            Insert(consideredPlan);
+
         }
 
         public new void RepairThreat(IPlan plan, ThreatenedLinkFlaw tclf)
