@@ -9,6 +9,7 @@ using BoltFreezer.PlanSpace;
 using BoltFreezer.PlanTools;
 using BoltFreezer.Utilities;
 using System.Linq;
+using BoltFreezer.Scheduling;
 using System.IO;
 
 namespace TestFreezer
@@ -182,15 +183,57 @@ namespace TestFreezer
         static void Main(string[] args)
         {
             //RunBlockTestInternal();
-            RunTravelTestInternal();
+            //var ci = new CinemICEtest("SimpleTonNewLinks2");
+            // var ci = new CinemICEtest("BridgeShots6(initial)");
+            //  var ci = new CinemICEtest("InitialAndFinal(5)");
+            //var ci = new CinemICEtest("InitialAndFinal(noobs)");
+            var ci = new CinemICEtest("InitFinalAndBridge(4)");
+            ci.problemname = "racetest(1)";
+            ci.problemname = "racetest(7)";
+            ci.problemname = "racetest(9)";
 
+            // Success: RaceWorld Problem 0
+            ci.problemname = "racetestWith2Connective";
+
+            ci.problemname = "raceTest9Agents";
+            ci.problemname = "duel4Test";
+            ci.problemname = "duel5Test";
+            ci.problemname = "duel6Test";
+            //ci.problemname = "michael3test";
+            ci.problemname = "raceblocktest6_";
+            ci.problemname = "raceblocktest14__";
+            ci.problemname = "raceblocktest19_";
+            ci.problemname = "raceblocktest20_";
+            ci.problemname = "raceblocktest21_";
+            ci.problemname = "raceblockSingles2_";
+            ci.problemname = "raceblockModHeight0_";
+
+            // Experiment Test, has 2 singles, plus 4 composites, with mod height procedure.
+            ci.problemname = "raceblockModHeightExp2_";
+            // 3 singles (stroll, pickup, put down)
+            ci.problemname = "raceblockModHeightExp3_";
+
+            //for (int i =34; i < 40; i++)
+            //{
+            //    ci.problemname = "RaceBlockWorld3_" + i.ToString()+ "_";
+
+            //    ci.RunTest(600000f, i);
+            //    GroundActionFactory.Reset();
+            //    CacheMaps.Reset();
+            //}
+            ci.problemname = "car_race_world_wcomp_12_";
+            var storedProblem = @"D:\Documents\Frostbow\Benchmarks\unityOutput\unity_unity_output_problem.txt";
+            ci.RunTest(600000f, 1, storedProblem, false);
+
+            // search (false ==> ignore depth as stopping condition, is default). Selection (E0) (true=> do check for no flaws no matter depth).
+
+
+
+            // RunTravelTestInternal();
+            //RunBlockTestInternal();
             //RunBlockTestGenerateProblems();
 
-            /*
-             * Travel Test --> 
-             * Block Test --> use already-generated problems. use BlockTest.cs to read.
-             * 
-             */
+            // Generate Poblems
 
             //var directory = @"D:\Documents\Frostbow\Benchmarks\blocks\randomGen\";
 

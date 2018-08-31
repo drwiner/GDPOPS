@@ -17,5 +17,3 @@ D:\Documents\Frostbow\gdpops\bin\Debug\BoltFreezer.pdb
 D:\Documents\Frostbow\gdpops\obj\x86\Debug\BoltFreezer.csproj.CoreCompileInputs.cache
 D:\Documents\Frostbow\gdpops\obj\x86\Debug\BoltFreezer.dll
 D:\Documents\Frostbow\gdpops\obj\x86\Debug\BoltFreezer.pdb
-D:\Documents\Frostbow\gdpop\obj\x86\Debug\BoltFreezer.csprojAssemblyReference.cache
-D:\Documents\Frostbow\gdpop\obj\x86\Debug\BoltFreezer.csproj.CoreCompileInputs.cache

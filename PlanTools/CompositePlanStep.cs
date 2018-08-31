@@ -79,18 +79,6 @@ namespace BoltFreezer.PlanTools
             subOrderings = comp.SubOrderings;
         }
 
-        public CompositePlanStep(CompositePlanStep comp) : base(comp as IPlanStep)
-        {
-            compositeAction = comp.Action as IComposite;
-            initialStep = comp.InitialStep;
-            goalStep = comp.GoalStep;
-
-            // Do not bother changing the PlanStep skin of these, as this has to happen during insertion
-            subSteps = comp.SubSteps;
-            subLinks = comp.SubLinks;
-            subOrderings = comp.SubOrderings;
-        }
-
         // Used for Clone
         public CompositePlanStep(IComposite comp, List<IPredicate> openconditions, IPlanStep init, IPlanStep goal, 
             List<IPlanStep> substeps, List<Tuple<IPlanStep, IPlanStep>> suborderings, List<CausalLink<IPlanStep>> clinks, int ID) 

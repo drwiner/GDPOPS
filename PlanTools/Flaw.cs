@@ -68,6 +68,50 @@ namespace BoltFreezer.PlanTools
             else if (other.isStatic && !isStatic)
                 return 1;
 
+            // {dummyGoal} LIFO
+
+            // take care of open conditions arising from substeps that are found in initial step.
+            //if (isDummyGoal && !other.isDummyGoal)
+            //{
+            //    return -1;
+            //}
+            //else if (other.isDummyGoal && !isDummyGoal)
+            //{
+            //    return 1;
+            //}
+            //else if (other.isDummyGoal && isDummyGoal)
+            //{
+            //    if (addReuseHeuristic > other.addReuseHeuristic)
+            //    {
+            //        return -1;
+            //    }
+            //    else
+            //    {
+            //        return 1;
+            //    }
+            //}
+
+            ////take care of open conditions arising from substeps that are found in initial step.
+            //if (hasDummyInit && !other.hasDummyInit)
+            //{
+            //    return -1;
+            //}
+            //else if (other.hasDummyInit && !hasDummyInit)
+            //{
+            //    return 1;
+            //}
+            //else if (other.hasDummyInit && hasDummyInit)
+            //{
+            //    if (addReuseHeuristic > other.addReuseHeuristic)
+            //    {
+            //        return -1;
+            //    }
+            //    else
+            //    {
+            //        return 1;
+            //    }
+            //}
+
             if (step.Depth > other.step.Depth)
             {
                 return 1;
@@ -75,6 +119,59 @@ namespace BoltFreezer.PlanTools
             else if(step.Depth < other.step.Depth)
             {
                 return -1;
+            }
+
+            if (precondition.Name.Equals("obss") || precondition.Name.Equals("obs-starts"))
+            {
+                if (other.precondition.Name.Equals("obss") || other.precondition.Name.Equals("obs-starts"))
+                {
+                    if (risks > 0 && other.risks == 0)
+                    {
+                        return -1;
+                    }
+                    else if (other.risks > 0 && risks == 0)
+                    {
+                        return 1;
+                    }
+                    if (other.risks > 0 && risks == other.risks)
+                    {
+                        // if they are both unsafe, choose one with most work
+                        if (addReuseHeuristic > other.addReuseHeuristic)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    }
+
+                    // Local step's open conditions first. Lower planstep ID == added to plan earlier
+                    if (step.ID < other.step.ID)
+                    {
+                        return -1;
+                    }
+                    else if (step.ID > other.step.ID)
+                        return 1;
+
+                    // If they are of the same step, only then do we select between mos work...
+                    if (addReuseHeuristic > other.addReuseHeuristic)
+                    {
+                        return -1;
+                    }
+                    else if (addReuseHeuristic < other.addReuseHeuristic)
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else if (other.precondition.Name.Equals("obs-starts") || other.precondition.Name.Equals("obss"))
+            {
+                return 1;
             }
 
             // MW-Loc-Conf = {threats} LIFO / {unsafe} MW_add / {local} MW_add
