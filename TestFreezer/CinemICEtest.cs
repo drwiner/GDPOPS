@@ -474,8 +474,8 @@ namespace TestFreezer
             var initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
             var PlanSteps = new List<string>();
 
-            initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
-            Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic(), 6), probNum, cutoffTime);
+           // initialPlan = PlannerScheduler.CreateInitialPlan(initial, goal);
+           // Run(initialPlan, new ADstar(false), new E3Star(new AddReuseHeuristic(), 8), probNum, cutoffTime);
 
             if (run_all)
             {

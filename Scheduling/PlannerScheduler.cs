@@ -204,7 +204,7 @@ namespace BoltFreezer.Scheduling
                         // need to modify stepAsComposite, so going to rereference on cloned plan.
                         var stepAsCompositeClone = planClone.Steps.First(s => s.ID == stepAsComposite.ID) as CompositeSchedulePlanStep;
                         planClone.Repair(oc, stepAsCompositeClone);
-                        planClone.ID += "r";
+                        planClone.ID += "rc";
                         Insert(planClone);
                     }
                     continue;
@@ -229,7 +229,7 @@ namespace BoltFreezer.Scheduling
 
                         var planClone = plan.Clone() as IPlan;
                         planClone.Repair(oc, step);
-                        planClone.ID += "r";
+                        planClone.ID += "rp";
                         Insert(planClone);
                     }
                 }

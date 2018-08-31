@@ -358,10 +358,40 @@ namespace TestFreezer
             }
         }
 
+        public static IPredicate ParenthesisObservationStringToPredicate(string si)
+        {
+            var stringItem = si.Substring(5);
+            var splitInput = stringItem.Split(' ');
+            var predName = splitInput[0].TrimStart('(');
+            bool sign = true;
+            int x = 1;
+            if (predName.Equals("not"))
+            {
+                sign = false;
+                x = 2;
+                predName = splitInput[1].TrimStart('(');
+            }
+            var terms = new List<ITerm>();
+            
+            foreach (string item in splitInput.Skip(x))
+            {
+                var cleanedItem = item.TrimEnd(')');
+                var newTerm = new Term(cleanedItem, true) as ITerm;
+                terms.Add(newTerm);
+            }
+            var predic = new Predicate(predName, terms, sign);
+            var obsPredicate = new Predicate("obs", new List<ITerm>() { predic as ITerm }, true) as IPredicate;
+            return obsPredicate;
+        }
+
         public static IPredicate ParenthesisStringToPredicate(string stringItem)
         {
             var splitInput = stringItem.Split(' ');
             var predName = splitInput[0].TrimStart('(');
+            if (predName.Equals("obs"))
+            {
+                return ParenthesisObservationStringToPredicate(stringItem);
+            }
             var terms = new List<ITerm>();
             foreach (string item in splitInput.Skip(1))
             {

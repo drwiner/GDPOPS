@@ -221,9 +221,14 @@ namespace TestFreezer
             //    GroundActionFactory.Reset();
             //    CacheMaps.Reset();
             //}
-            ci.problemname = "car_race_world_wcomp_14_";
+
+            // name used in video
+            //ci.problemname = "car_race_world_wcomp_5_";
+            ci.problemname = "car_race_world_wbel_2_";
             var storedProblem = @"D:\Documents\Frostbow\Benchmarks\unityOutput\unity_unity_output_problem.txt";
-            ci.RunTest(600000f, 1, storedProblem, false);
+            storedProblem = @"D:\Documents\Frostbow\Benchmarks\unityOutput\bel_world_unity_output_problem.txt";
+            storedProblem = @"D:\Documents\Frostbow\Benchmarks\unityOutput\bel_world_unity_output_problem_with_win.txt";
+            ci.RunTest(600000f, 1, storedProblem, true);
 
             // search (false ==> ignore depth as stopping condition, is default). Selection (E0) (true=> do check for no flaws no matter depth).
 

@@ -24,3 +24,4 @@ D:\Documents\Frostbow\gdpops\bin\x64\Release\BoltFreezer.pdb
 D:\Documents\Frostbow\gdpops\obj\x64\Release\BoltFreezer.csproj.CoreCompileInputs.cache
 D:\Documents\Frostbow\gdpops\obj\x64\Release\BoltFreezer.dll
 D:\Documents\Frostbow\gdpops\obj\x64\Release\BoltFreezer.pdb
+D:\Documents\Frostbow\gdpops\obj\x64\Release\BoltFreezer.csprojAssemblyReference.cache
