@@ -69,37 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheTools\ProblemFreezer.cs" />
-    <Compile Include="Camera\ActionSeg.cs" />
-    <Compile Include="Camera\CameraEnums\CompositionCoordinate.cs" />
-    <Compile Include="Camera\CameraEnums\Directive.cs" />
-    <Compile Include="Camera\CamSchema.cs" />
-    <Compile Include="Camera\CamTargetSchema.cs" />
-    <Compile Include="DecompTools\Constraints.cs" />
-    <Compile Include="DecompTools\ContextPredicate.cs" />
     <Compile Include="DecompTools\Decomposition.cs" />
     <Compile Include="DecompTools\DecompositionLinks.cs" />
-    <Compile Include="DecompTools\TimelineDecomposition.cs" />
-    <Compile Include="Camera\CameraEnums\Framing.cs" />
-    <Compile Include="Camera\CameraEnums\Hangle.cs" />
-    <Compile Include="Camera\CameraEnums\Orient.cs" />
-    <Compile Include="Camera\CameraEnums\Vangle.cs" />
-    <Compile Include="Interfaces\DTN\IConstraint.cs" />
-    <Compile Include="Interfaces\DTN\IDecomposition.cs" />
-    <Compile Include="Interfaces\DTN\ITask.cs" />
     <Compile Include="Enums\SelectionType.cs" />
     <Compile Include="FileIO\JsonProblemDeserializer.cs" />
     <Compile Include="FileIO\SimpleJson.cs" />
-    <Compile Include="Interfaces\ICompositeSchedule.cs" />
     <Compile Include="Interfaces\POP\IFlawLibrary.cs" />
     <Compile Include="Interfaces\POP\ISelection.cs" />
-    <Compile Include="Camera\CamPlanStep.cs" />
     <Compile Include="PlanTools\Selection.cs" />
-    <Compile Include="Scheduling\CompositeSchedule.cs" />
-    <Compile Include="Scheduling\CompositeSchedulePlanStep.cs" />
-    <Compile Include="Scheduling\MergeManager.cs" />
-    <Compile Include="Scheduling\PlannerScheduler.cs" />
-    <Compile Include="Scheduling\PlanSchedule.cs" />
-    <Compile Include="Scheduling\Schedule.cs" />
     <Compile Include="Utilities\BinaryHeap.cs" />
     <Compile Include="CacheTools\CacheMaps.cs" />
     <Compile Include="Enums\ActionType.cs" />
@@ -120,7 +97,6 @@
     <Compile Include="Interfaces\POP\IFrontier.cs" />
     <Compile Include="Interfaces\POP\IHeuristic.cs" />
     <Compile Include="Interfaces\IIntention.cs" />
-    <Compile Include="Interfaces\IMediationEdge.cs" />
     <Compile Include="Interfaces\POP\IPlanner.cs" />
     <Compile Include="Interfaces\POP\IPlanStep.cs" />
     <Compile Include="Interfaces\IObject.cs" />

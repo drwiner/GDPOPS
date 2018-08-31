@@ -1,5 +1,5 @@
 ﻿using BoltFreezer.Interfaces;
-using BoltFreezer.Scheduling;
+using BoltFreezer.PlanTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace BoltFreezer.DecompTools
             ParentMap = new Dictionary<int, int>();
         }
 
-        public void Insert(CompositeSchedulePlanStep csps, IPlanStep substep)
+        public void Insert(ICompositePlanStep csps, IPlanStep substep)
         {
             ParentMap[substep.ID] = csps.ID;
 

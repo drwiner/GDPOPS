@@ -599,60 +599,7 @@ namespace TestFreezer
             foreach(var problem in problems)
             {
                 WriteProblemToFile(problem, directory + @"\Problems\");
-                // Reset Cached Items
-                // GroundActionFactory.Reset();
-                // CacheMaps.Reset();
-
-                // var PF = new ProblemFreezer(domainName, domainDirectory, domain, problem);
-                // PF.Serialize();
-
-                // Console.WriteLine("Detecting Statics");
-                // GroundActionFactory.DetectStatics(CacheMaps.CausalMap, CacheMaps.ThreatMap);
-
-                // var initPlan = PlanSpacePlanner.CreateInitialPlan(PF);
-
-                // // Removing irrelevant actions
-                // Console.WriteLine("Removing Irrelevant Actions");
-                // var staticInitial = initPlan.Initial.Predicates.Where(state => GroundActionFactory.Statics.Contains(state));
-
-                // // Every action that has No preconditions which are both static and not in staticInitial
-                // var possibleActions = GroundActionFactory.GroundActions.Where(action => !action.Preconditions.Any(pre => GroundActionFactory.Statics.Contains(pre) && !staticInitial.Contains(pre)));
-                // GroundActionFactory.GroundActions = possibleActions.ToList();
-                // GroundActionFactory.GroundLibrary = possibleActions.ToDictionary(item => item.ID, item => item);
-
-                // // Composing HTNs
-                // Console.WriteLine("Composing HTNs");
-                // Composite.ComposeHTNs(HTN_level, CompositeMethods);
-
-                // // Caching Causal Maps
-                // Console.WriteLine("Caching Causal Maps");
-                // CacheMaps.Reset();
-                // CacheMaps.CacheLinks(GroundActionFactory.GroundActions);
-                // CacheMaps.CacheGoalLinks(GroundActionFactory.GroundActions, initPlan.Goal.Predicates);
-
-                // // Cache Heuristic Costs (dynamic programming)
-                // CacheMaps.CacheAddReuseHeuristic(initPlan.Initial);
-
-                // // Redo to gaurantee accuracy (needs refactoring)
-                // initPlan = PlanSpacePlanner.CreateInitialPlan(PF);
-
-                // var probNum = Int32.Parse(problem.Name);
-                //// RunPlanner(initPlan.Clone() as IPlan, new ADstar(false), new E0(new AddReuseHeuristic(), true), cutoff, directory, probNum);
-
-                // RunPlanner(initPlan.Clone() as IPlan, new ADstar(true), new E0(new AddReuseHeuristic()), cutoff, directory, probNum);
-                // RunPlanner(initPlan.Clone() as IPlan, new ADstar(true), new E1(new AddReuseHeuristic()), cutoff, directory, probNum);
-                // RunPlanner(initPlan.Clone() as IPlan, new ADstar(true), new E2(new AddReuseHeuristic()), cutoff, directory, probNum);
-                // RunPlanner(initPlan.Clone() as IPlan, new ADstar(true), new E3(new AddReuseHeuristic()), cutoff, directory, probNum);
-                // RunPlanner(initPlan.Clone() as IPlan, new BFS(false), new Nada(new ZeroHeuristic()), cutoff, directory, probNum);
-
-                //// RunPlanner(initPlan.Clone() as IPlan, new BFS(true), new Nada(new ZeroHeuristic()), cutoff, directory, probNum);
-
-
-                // Add to List
-                //  initialPlans.Add(initPlan);//
             }
-
-            //  return initialPlans;
         }
 
         public static void RunPlanner(IPlan initPi, ISearch SearchMethod, ISelection SelectMethod, float cutoff, string directoryToSaveTo, int problem)
